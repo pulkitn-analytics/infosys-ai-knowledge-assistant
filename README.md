@@ -8,6 +8,11 @@ The project combines document ingestion, vector search, role-based access contro
 
 ---
 
+## 🎥 Project Demo
+
+[Watch the complete project demonstration](https://drive.google.com/file/d/1xNIeoniK-cLT_rBVa0Nq3VEh2ppmTFa1/view?usp=sharing)
+
+The video demonstrates the deployed application, employee and admin workflows, document upload and indexing, RAG-based knowledge retrieval, source citations, feedback, analytics, and the operational incident lookup workflow.
 ## 1. Project Overview
 
 Enterprise teams often need to repeatedly search through documents, runbooks, policies, project references, and operational information to answer routine questions.
@@ -901,6 +906,16 @@ Backend:
 https://infosys-ai-knowledge-assistant-ifkw.onrender.com
 
 ---
+
+## Authors
+
+1. Pulkit Narang
+2. Subhansu Bose
+3. Soumyakanta Mishra
+4. Chandra Akash Kiran
+5. Sayan Modak
+6. Sanket Arun Patil
+7. Shruti Vishwas Deshpande
 
 ## 24. Disclaimer
 
