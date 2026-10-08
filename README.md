@@ -1,4 +1,4 @@
-﻿# Infosys AI Knowledge Assistant (Enterprise GPT)
+# Infosys AI Knowledge Assistant (Enterprise GPT)
 
 An enterprise knowledge assistant that enables employees to search approved organizational documents, retrieve relevant evidence, generate grounded answers with citations, and access selected operational tools through a controlled AI workflow.
 
@@ -8,11 +8,6 @@ The project combines document ingestion, vector search, role-based access contro
 
 ---
 
-## 🎥 Project Demo
-
-[Watch the complete project demonstration](https://drive.google.com/file/d/1xNIeoniK-cLT_rBVa0Nq3VEh2ppmTFa1/view?usp=sharing)
-
-The video demonstrates the deployed application, employee and admin workflows, document upload and indexing, RAG-based knowledge retrieval, source citations, feedback, analytics, and the operational incident lookup workflow.
 ## 1. Project Overview
 
 Enterprise teams often need to repeatedly search through documents, runbooks, policies, project references, and operational information to answer routine questions.
@@ -81,41 +76,41 @@ The system is designed to reduce unsupported answers by grounding responses in r
 ## 3. High-Level Architecture
 
 ```text
-                         â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-                         â”‚      Next.js UI      â”‚
-                         â”‚   React + Tailwind   â”‚
-                         â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
-                                    â”‚
-                                    â”‚ HTTP / REST
-                                    â–¼
-                         â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-                         â”‚      FastAPI API     â”‚
-                         â”‚   Authentication     â”‚
-                         â”‚   RBAC / Routes      â”‚
-                         â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
-                                    â”‚
-                    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-                    â”‚               â”‚                â”‚
-                    â–¼               â–¼                â–¼
-             â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-             â”‚ PostgreSQL â”‚ â”‚ AI Workflows â”‚ â”‚ MCP / Tools  â”‚
-             â”‚ Users      â”‚ â”‚ Classify     â”‚ â”‚ Operational  â”‚
-             â”‚ Documents  â”‚ â”‚ Retrieve     â”‚ â”‚ Connectors   â”‚
-             â”‚ Feedback   â”‚ â”‚ Synthesize   â”‚ â”‚              â”‚
-             â”‚ Audit Logs â”‚ â”‚ Validate     â”‚ â”‚              â”‚
-             â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
-                                   â”‚
-                                   â–¼
-                            â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-                            â”‚  ChromaDB    â”‚
-                            â”‚ Vector Store â”‚
-                            â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜
-                                   â”‚
-                                   â–¼
-                            â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-                            â”‚  Gemini LLM  â”‚
-                            â”‚ + Embeddings â”‚
-                            â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                         ┌──────────────────────┐
+                         │      Next.js UI      │
+                         │   React + Tailwind   │
+                         └──────────┬───────────┘
+                                    │
+                                    │ HTTP / REST
+                                    ▼
+                         ┌──────────────────────┐
+                         │      FastAPI API     │
+                         │   Authentication     │
+                         │   RBAC / Routes      │
+                         └──────────┬───────────┘
+                                    │
+                    ┌───────────────┼────────────────┐
+                    │               │                │
+                    ▼               ▼                ▼
+             ┌────────────┐ ┌──────────────┐ ┌──────────────┐
+             │ PostgreSQL │ │ AI Workflows │ │ MCP / Tools  │
+             │ Users      │ │ Classify     │ │ Operational  │
+             │ Documents  │ │ Retrieve     │ │ Connectors   │
+             │ Feedback   │ │ Synthesize   │ │              │
+             │ Audit Logs │ │ Validate     │ │              │
+             └────────────┘ └──────┬───────┘ └──────────────┘
+                                   │
+                                   ▼
+                            ┌──────────────┐
+                            │  ChromaDB    │
+                            │ Vector Store │
+                            └──────┬───────┘
+                                   │
+                                   ▼
+                            ┌──────────────┐
+                            │  Gemini LLM  │
+                            │ + Embeddings │
+                            └──────────────┘
 ```
 
 ---
@@ -126,40 +121,40 @@ A typical knowledge query follows this flow:
 
 ```text
 User Question
-      â”‚
-      â–¼
+      │
+      ▼
 Authentication / RBAC
-      â”‚
-      â–¼
+      │
+      ▼
 Query Classification
-      â”‚
-      â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–º Operational Tool Query
-      â”‚                         â”‚
-      â”‚                         â–¼
-      â”‚                    MCP Tool Lookup
-      â”‚
-      â–¼
+      │
+      ├───────────────► Operational Tool Query
+      │                         │
+      │                         ▼
+      │                    MCP Tool Lookup
+      │
+      ▼
 Knowledge Query
-      â”‚
-      â–¼
+      │
+      ▼
 Embedding / Retrieval
-      â”‚
-      â–¼
+      │
+      ▼
 ChromaDB Vector Search
-      â”‚
-      â–¼
+      │
+      ▼
 Relevance Filtering
-      â”‚
-      â–¼
+      │
+      ▼
 Grounded Synthesis
-      â”‚
-      â–¼
+      │
+      ▼
 Citation Builder
-      â”‚
-      â–¼
+      │
+      ▼
 Answer Validation
-      â”‚
-      â–¼
+      │
+      ▼
 Grounded Answer + Sources
 ```
 
@@ -175,33 +170,33 @@ The main AI workflow is organized under:
 
 ```text
 ai_workflows/
-â”œâ”€â”€ query_classification/
-â”‚   â”œâ”€â”€ __init__.py
-â”‚   â”œâ”€â”€ query_classifier.py
-â”‚   â””â”€â”€ rbac_classifier.py
-â”‚
-â”œâ”€â”€ tool_selection/
-â”‚   â”œâ”€â”€ __init__.py
-â”‚   â””â”€â”€ tool_selector.py
-â”‚
-â”œâ”€â”€ rag_retrieval/
-â”‚   â”œâ”€â”€ __init__.py
-â”‚   â””â”€â”€ retriever.py
-â”‚
-â”œâ”€â”€ grounded_synthesis/
-â”‚   â”œâ”€â”€ __init__.py
-â”‚   â””â”€â”€ synthesis_engine.py
-â”‚
-â”œâ”€â”€ citation_builder/
-â”‚   â”œâ”€â”€ __init__.py
-â”‚   â””â”€â”€ citation_formatter.py
-â”‚
-â”œâ”€â”€ answer_validation/
-â”‚   â”œâ”€â”€ __init__.py
-â”‚   â””â”€â”€ answer_validator.py
-â”‚
-â”œâ”€â”€ workflow.py
-â””â”€â”€ README.md
+├── query_classification/
+│   ├── __init__.py
+│   ├── query_classifier.py
+│   └── rbac_classifier.py
+│
+├── tool_selection/
+│   ├── __init__.py
+│   └── tool_selector.py
+│
+├── rag_retrieval/
+│   ├── __init__.py
+│   └── retriever.py
+│
+├── grounded_synthesis/
+│   ├── __init__.py
+│   └── synthesis_engine.py
+│
+├── citation_builder/
+│   ├── __init__.py
+│   └── citation_formatter.py
+│
+├── answer_validation/
+│   ├── __init__.py
+│   └── answer_validator.py
+│
+├── workflow.py
+└── README.md
 ```
 
 ### Query Classification
@@ -246,19 +241,19 @@ Example:
 User:
 What is the status of incident INC-1001?
 
-        â†“
+        ↓
 
 Query / Tool Selection
 
-        â†“
+        ↓
 
 Incident Status Lookup
 
-        â†“
+        ↓
 
 Incident evidence
 
-        â†“
+        ↓
 
 Grounded response
 ```
@@ -343,9 +338,9 @@ Access is controlled through backend permissions rather than relying only on fro
 
 ### Deployment
 
-- Vercel â€” frontend
-- Render â€” backend
-- Render PostgreSQL â€” production database
+- Vercel — frontend
+- Render — backend
+- Render PostgreSQL — production database
 
 ### Version Control
 
@@ -358,51 +353,51 @@ Access is controlled through backend permissions rather than relying only on fro
 
 ```text
 infosys-ai-knowledge-assistant/
-â”‚
-â”œâ”€â”€ ai_workflows/
-â”‚   â”œâ”€â”€ query_classification/
-â”‚   â”œâ”€â”€ tool_selection/
-â”‚   â”œâ”€â”€ rag_retrieval/
-â”‚   â”œâ”€â”€ grounded_synthesis/
-â”‚   â”œâ”€â”€ citation_builder/
-â”‚   â”œâ”€â”€ answer_validation/
-â”‚   â”œâ”€â”€ workflow.py
-â”‚   â””â”€â”€ README.md
-â”‚
-â”œâ”€â”€ backend/
-â”‚   â”œâ”€â”€ routes/
-â”‚   â”œâ”€â”€ schemas/
-â”‚   â”œâ”€â”€ services/
-â”‚   â”œâ”€â”€ uploads/
-â”‚   â”œâ”€â”€ main.py
-â”‚   â”œâ”€â”€ requirements.txt
-â”‚   â””â”€â”€ .env.example
-â”‚
-â”œâ”€â”€ data/
-â”‚
-â”œâ”€â”€ deployment/
-â”‚   â””â”€â”€ README.md
-â”‚
-â”œâ”€â”€ docs/
-â”‚
-â”œâ”€â”€ frontend/
-â”‚   â”œâ”€â”€ app/
-â”‚   â”œâ”€â”€ components/
-â”‚   â”œâ”€â”€ contexts/
-â”‚   â”œâ”€â”€ public/
-â”‚   â””â”€â”€ .env.example
-â”‚
-â”œâ”€â”€ ingestion_pipeline/
-â”‚
-â”œâ”€â”€ tests/
-â”‚
-â”œâ”€â”€ uploads/
-â”‚
-â”œâ”€â”€ vector_db/
-â”‚
-â”œâ”€â”€ .gitignore
-â”œâ”€â”€ .python-version
-â””â”€â”€ README.md
+│
+├── ai_workflows/
+│   ├── query_classification/
+│   ├── tool_selection/
+│   ├── rag_retrieval/
+│   ├── grounded_synthesis/
+│   ├── citation_builder/
+│   ├── answer_validation/
+│   ├── workflow.py
+│   └── README.md
+│
+├── backend/
+│   ├── routes/
+│   ├── schemas/
+│   ├── services/
+│   ├── uploads/
+│   ├── main.py
+│   ├── requirements.txt
+│   └── .env.example
+│
+├── data/
+│
+├── deployment/
+│   └── README.md
+│
+├── docs/
+│
+├── frontend/
+│   ├── app/
+│   ├── components/
+│   ├── contexts/
+│   ├── public/
+│   └── .env.example
+│
+├── ingestion_pipeline/
+│
+├── tests/
+│
+├── uploads/
+│
+├── vector_db/
+│
+├── .gitignore
+├── .python-version
+└── README.md
 ```
 
 `uploads/` and `vector_db/` contain runtime/local data and should not be treated as application source code.
@@ -569,17 +564,17 @@ The workflow is:
 
 ```text
 Upload document
-      â†“
+      ↓
 Document stored
-      â†“
+      ↓
 Text extraction
-      â†“
+      ↓
 Chunking
-      â†“
+      ↓
 Embedding generation
-      â†“
+      ↓
 ChromaDB indexing
-      â†“
+      ↓
 Document available for retrieval
 ```
 
@@ -912,15 +907,3 @@ https://infosys-ai-knowledge-assistant-ifkw.onrender.com
 This project was developed as an educational/project demonstration of an enterprise AI knowledge assistant.
 
 Any synthetic documents, example employee data, incident records, policies, operational procedures, or other demonstration content included in the project are created for testing and demonstration purposes and do not represent official Infosys documentation or policy.
-
-## Authors
-
-1. Pulkit Narang
-2. Subhansu Bose
-3. Soumyakanta Mishra
-4. Chandra Akash Kiran
-5. Sayan Modak
-6. Sanket Arun Patil
-7. Shruti Vishwas Deshpande
-8. M.S. Pavan Shankar
-
